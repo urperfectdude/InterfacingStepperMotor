@@ -1,21 +1,36 @@
-#include<reg51.h>
-sbit LED_pin = P2^0; //set the LED pin as P2.0
-void delay(int ms){
-   unsigned int i, j;
-   for(i = 0; i<ms; i++){ // Outer for loop for given milliseconds value
-      for(j = 0; j< 1275; j++){
-         //execute in each milliseconds;
-       }
-   }
-}
-void main(){
-   int rot_angle[] = {0x0C,0x06,0x03,0x09};
-   int i;
-   while(1){
-      //infinite loop for LED blinking
-      for(i = 0; i<4; i++){
-         P0 = rot_angle[i];
-         delay(100);
-      }
-   }
-}
+A1 EQU P1.0
+A2 EQU P1.1
+A3 EQU P1.2
+A4 EQU P1.3
+ORG 00H
+MOV TMOD,#00000001B
+
+MAIN:
+CLR A1
+ACALL DELAY
+SETB A1
+
+CLR A2
+ACALL DELAY
+SETB A2
+
+CLR A3
+ACALL DELAY
+SETB A3 
+
+CLR A4
+ACALL DELAY
+SETB A4
+SJMP MAIN
+      
+
+DELAY:MOV R6,#1D       
+BACK: MOV TH0,#00000000B   
+      MOV TL0,#00000000B   
+      SETB TR0             
+HERE2: JNB TF0,HERE2        
+      CLR TR0              
+      CLR TF0             
+      DJNZ R6,BACK
+      RET
+END
