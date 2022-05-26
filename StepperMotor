@@ -1,0 +1,21 @@
+#include<reg51.h>
+sbit LED_pin = P2^0; //set the LED pin as P2.0
+void delay(int ms){
+   unsigned int i, j;
+   for(i = 0; i<ms; i++){ // Outer for loop for given milliseconds value
+      for(j = 0; j< 1275; j++){
+         //execute in each milliseconds;
+       }
+   }
+}
+void main(){
+   int rot_angle[] = {0x0C,0x06,0x03,0x09};
+   int i;
+   while(1){
+      //infinite loop for LED blinking
+      for(i = 0; i<4; i++){
+         P0 = rot_angle[i];
+         delay(100);
+      }
+   }
+}
